@@ -1,0 +1,266 @@
+{
+  "contractName": "PropertyRegistry",
+  "compiler": "solc ^0.8.19",
+  "network": "Polygon Amoy Testnet (Chain ID: 80002)",
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        { "indexed": true, "name": "propertyId", "type": "uint256" },
+        { "indexed": true, "name": "blockedBy", "type": "address" },
+        { "indexed": false, "name": "reason", "type": "string" }
+      ],
+      "name": "PropertyBlocked",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        { "indexed": true, "name": "propertyId", "type": "uint256" },
+        { "indexed": true, "name": "owner", "type": "address" },
+        { "indexed": false, "name": "ipfsHash", "type": "string" },
+        { "indexed": false, "name": "location", "type": "string" },
+        { "indexed": false, "name": "registrationDate", "type": "uint256" }
+      ],
+      "name": "PropertyRegistered",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        { "indexed": true, "name": "propertyId", "type": "uint256" },
+        { "indexed": true, "name": "unblockedBy", "type": "address" }
+      ],
+      "name": "PropertyUnblocked",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        { "indexed": true, "name": "registrar", "type": "address" },
+        { "indexed": true, "name": "addedBy", "type": "address" }
+      ],
+      "name": "RegistrarAdded",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        { "indexed": true, "name": "registrar", "type": "address" },
+        { "indexed": true, "name": "removedBy", "type": "address" }
+      ],
+      "name": "RegistrarRemoved",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        { "indexed": true, "name": "transferId", "type": "uint256" },
+        { "indexed": true, "name": "propertyId", "type": "uint256" },
+        { "indexed": true, "name": "approvedBy", "type": "address" }
+      ],
+      "name": "TransferApproved",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        { "indexed": true, "name": "transferId", "type": "uint256" },
+        { "indexed": true, "name": "propertyId", "type": "uint256" },
+        { "indexed": true, "name": "cancelledBy", "type": "address" }
+      ],
+      "name": "TransferCancelled",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        { "indexed": true, "name": "transferId", "type": "uint256" },
+        { "indexed": true, "name": "propertyId", "type": "uint256" },
+        { "indexed": true, "name": "newOwner", "type": "address" }
+      ],
+      "name": "TransferCompleted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        { "indexed": true, "name": "transferId", "type": "uint256" },
+        { "indexed": true, "name": "propertyId", "type": "uint256" },
+        { "indexed": true, "name": "seller", "type": "address" },
+        { "indexed": false, "name": "buyer", "type": "address" },
+        { "indexed": false, "name": "price", "type": "uint256" }
+      ],
+      "name": "TransferInitiated",
+      "type": "event"
+    },
+    {
+      "inputs": [{ "name": "_registrar", "type": "address" }],
+      "name": "addRegistrar",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "admin",
+      "outputs": [{ "name": "", "type": "address" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [{ "name": "_transferId", "type": "uint256" }],
+      "name": "approveTransfer",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "name": "_propertyId", "type": "uint256" },
+        { "name": "_reason", "type": "string" }
+      ],
+      "name": "blockDisputedProperty",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [{ "name": "_transferId", "type": "uint256" }],
+      "name": "cancelTransfer",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [{ "name": "_transferId", "type": "uint256" }],
+      "name": "completeTransfer",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [{ "name": "_propertyId", "type": "uint256" }],
+      "name": "getPropertyDetails",
+      "outputs": [
+        { "name": "propertyId", "type": "uint256" },
+        { "name": "owner", "type": "address" },
+        { "name": "ipfsHash", "type": "string" },
+        { "name": "location", "type": "string" },
+        { "name": "area", "type": "uint256" },
+        { "name": "propertyType", "type": "string" },
+        { "name": "registrationDate", "type": "uint256" },
+        { "name": "status", "type": "uint8" }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [{ "name": "_owner", "type": "address" }],
+      "name": "getPropertiesByOwner",
+      "outputs": [{ "name": "", "type": "uint256[]" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getTotalProperties",
+      "outputs": [{ "name": "", "type": "uint256" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getTotalTransfers",
+      "outputs": [{ "name": "", "type": "uint256" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [{ "name": "_transferId", "type": "uint256" }],
+      "name": "getTransferDetails",
+      "outputs": [
+        { "name": "propertyId", "type": "uint256" },
+        { "name": "seller", "type": "address" },
+        { "name": "buyer", "type": "address" },
+        { "name": "price", "type": "uint256" },
+        { "name": "initiatedAt", "type": "uint256" },
+        { "name": "status", "type": "uint8" },
+        { "name": "registrarApproved", "type": "bool" }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "name": "_propertyId", "type": "uint256" },
+        { "name": "_buyer", "type": "address" },
+        { "name": "_price", "type": "uint256" }
+      ],
+      "name": "initiateTransfer",
+      "outputs": [{ "name": "", "type": "uint256" }],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [{ "name": "_address", "type": "address" }],
+      "name": "isRegistrar",
+      "outputs": [{ "name": "", "type": "bool" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "propertyCounter",
+      "outputs": [{ "name": "", "type": "uint256" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        { "name": "_owner", "type": "address" },
+        { "name": "_ipfsHash", "type": "string" },
+        { "name": "_location", "type": "string" },
+        { "name": "_area", "type": "uint256" },
+        { "name": "_propertyType", "type": "string" }
+      ],
+      "name": "registerProperty",
+      "outputs": [{ "name": "", "type": "uint256" }],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [{ "name": "", "type": "address" }],
+      "name": "registrars",
+      "outputs": [{ "name": "", "type": "bool" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [{ "name": "_registrar", "type": "address" }],
+      "name": "removeRegistrar",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "transferCounter",
+      "outputs": [{ "name": "", "type": "uint256" }],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [{ "name": "_propertyId", "type": "uint256" }],
+      "name": "unblockProperty",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ]
+}
